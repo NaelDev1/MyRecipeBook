@@ -1,42 +1,46 @@
-﻿using MyRecipeBook.Application.Services.AutoMapper;
+﻿using AutoMapper;
+using MyRecipeBook.Application.Services.AutoMapper;
 using MyRecipeBook.Application.Services.Cryptography;
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
+using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Exceptions.ExceptionsBase;
 
 namespace MyRecipeBook.Application.UseCases.User.Register;
 
-public class RegisterUserUseCase
+public class RegisterUserUseCase: IRegisterUserUseCase
 {
     private readonly IUserWriteOnlyRepository _writeOnlyRepository;
     private readonly IUserReadOnlyRepository _readOnlyRepository;
+    private readonly IMapper _mapper;
+    private readonly PasswordEncripter _passwordEncripter;
+    private readonly IUnitOfWork _unityOfWork;
 
-
-
-    public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request) 
+    public RegisterUserUseCase(
+        IUserWriteOnlyRepository writeOnlyRepository,
+        IUserReadOnlyRepository readOnlyRepository,
+        IMapper mapper,
+        PasswordEncripter passwordEncripter,
+        IUnitOfWork unityOfWork)
     {
-        // validar a request
+        _writeOnlyRepository = writeOnlyRepository;
+        _readOnlyRepository = readOnlyRepository;
+        _mapper = mapper;
+        _passwordEncripter = passwordEncripter;
+        _unityOfWork = unityOfWork;
+    }
+
+    public async Task<ResponseRegisteredUserJson> ExecuteAsync(RequestRegisterUserJson request) 
+    {
         Validate(request);
 
-        // mapear a request em uma entidade
-        var autoMapper = new AutoMapper.MapperConfiguration(options =>
-        {
-            options.AddProfile(new AutoMapping());
-        }).CreateMapper();
+        var user = _mapper.Map<Domain.Entities.User>(request);
+        
+        user.Password = _passwordEncripter.Encrypt(request.Password);
 
-        var user = autoMapper.Map<Domain.Entities.User>(request);
-
-        // criptografia da senha
-        var criptografia = new PasswordEncripter();
-        user.Password = criptografia.Encrypt(request.Password);
-      
-
-      
-        // salvar no banco de dados
-       
-
-
+        await _writeOnlyRepository.Add(user);
+        await _unityOfWork.Commit();
         return new ResponseRegisteredUserJson { Name = request.Name};
     }
 
