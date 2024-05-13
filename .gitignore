@@ -9,7 +9,9 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+app.settings.json
+appsettings.Development.json
+app.settings.Development.json
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -361,3 +363,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Backend/MyRecipeBook.API/appsettings.Development.json
