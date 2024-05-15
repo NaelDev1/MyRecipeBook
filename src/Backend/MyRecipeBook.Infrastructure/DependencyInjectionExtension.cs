@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentMigrator.Runner;
+using FluentMigrator.Postgres;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Infrastructure.DataAccess;
 using MyRecipeBook.Infrastructure.DataAccess.Repositories;
+using System.Reflection;
 
 namespace MyRecipeBook.Infrastructure;
 
@@ -14,7 +17,9 @@ public static class DependencyInjectionExtension
     {
         AddDbContext(services, configuration);
         AddRepositories(services);
-       
+        AddFluentMigrator_Postgree(services, configuration);
+
+
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
@@ -33,4 +38,16 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserWriteOnlyRepository, UserRopository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
+
+    private static void AddFluentMigrator_Postgree(IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionStrings = configuration.GetConnectionString("ConnectionPostgree");
+        services.AddFluentMigratorCore().ConfigureRunner(options =>
+        {
+            options.WithGlobalConnectionString(connectionStrings)
+            .AddPostgres()
+            .ScanIn(Assembly.Load("MyRecipeBook.Infrastructure")).For.All();
+        });
+    }
+
 }

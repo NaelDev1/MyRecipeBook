@@ -47,5 +47,7 @@ app.Run();
 
 void MigrateDataBse()
 {
-    DatabaseMigration.Migrate(builder?.Configuration.GetConnectionString("ConnectionPostgree")!);
+    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+
+    DatabaseMigration.Migrate(builder?.Configuration.GetConnectionString("ConnectionPostgree")!, serviceScope.ServiceProvider);
 }
