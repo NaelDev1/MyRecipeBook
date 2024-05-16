@@ -5,6 +5,7 @@ using FluentAssertions;
 using MyRecipeBook.Application.Services.Cryptography;
 using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Mapper;
+using CommonTestUtilities.Repositores;
 
 namespace UseCasesTest.User.Register;
 
@@ -13,13 +14,9 @@ public class RegisterUserUseCaseTest
     [Fact]
     public async Task Success()
     {
-        //var request = RequestRegisterUserJsonBuilder.Build();
+        var request = RequestRegisterUserJsonBuilder.Build();
 
-        //var encryptor = PasswordEncripterBuilder.Build();
-
-        //var autoMapper = AutoMapperBuilder.Build();
-
-        //var useCase = new RegisterUserUseCase(encryptor, autoMapper);
+        var useCase = UseCaseBuild();
 
         var result = await useCase.ExecuteAsync(request);
 
@@ -27,6 +24,22 @@ public class RegisterUserUseCaseTest
         result.Name.Should().Be(request.Name);
 
 
+    }
+
+    public RegisterUserUseCase UseCaseBuild()
+    {
+        var encryptor = PasswordEncripterBuilder.Build();
+
+        var autoMapper = AutoMapperBuilder.Build();
+
+        var writeOnlyRepository = IUserWriteOnlyRepositoryBuilder.Build();
+
+        var userReadOnlyRepository = new IUserReadOnlyRepositoryBuilder().Build();
+
+        var unityOfWork = IUnitOfWorkBuilder.Build();
+
+
+       return  new RegisterUserUseCase(writeOnlyRepository, userReadOnlyRepository, autoMapper, encryptor, unityOfWork);
     }
 
 }
