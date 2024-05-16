@@ -129,8 +129,8 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode ser vazio.</value>
   </data>
-  <data name="PASSWORD_EMPY" xml:space="preserve">
-    <value>A senha não pode estar vazia.</value>
+  <data name="PASSWORD_INVALID" xml:space="preserve">
+    <value>A senha tem que ter mais de 6 caracteres.</value>
   </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Erro desconhecido.</value>

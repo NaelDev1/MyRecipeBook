@@ -23,9 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRecipeBook.Communication"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRecipeBook.Exceptions", "src\Shared\MyRecipeBook.Exceptions\MyRecipeBook.Exceptions.csproj", "{0AF97F79-B821-4D60-9347-F58138A75CAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validators.Test", "testes\Validators.Test\Validators.Test.csproj", "{35B5E616-A850-4590-8BC2-1B92AB9A7FE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validators.Test", "testes\Validators.Test\Validators.Test.csproj", "{35B5E616-A850-4590-8BC2-1B92AB9A7FE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTestUtilities", "testes\CommonTestUtilities\CommonTestUtilities.csproj", "{3C8703FE-D9C8-4803-BFBA-070FE9441727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTestUtilities", "testes\CommonTestUtilities\CommonTestUtilities.csproj", "{3C8703FE-D9C8-4803-BFBA-070FE9441727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCasesTest", "testes\UseCasesTest\UseCasesTest.csproj", "{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{3C8703FE-D9C8-4803-BFBA-070FE9441727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8703FE-D9C8-4803-BFBA-070FE9441727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C8703FE-D9C8-4803-BFBA-070FE9441727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{0AF97F79-B821-4D60-9347-F58138A75CAC} = {38A05D6C-9995-4DA2-9375-B51B0D7DD29C}
 		{35B5E616-A850-4590-8BC2-1B92AB9A7FE6} = {33D894D9-9573-40F4-B76D-BD7913AEB221}
 		{3C8703FE-D9C8-4803-BFBA-070FE9441727} = {33D894D9-9573-40F4-B76D-BD7913AEB221}
+		{BC8C5D70-BC80-42D6-954B-4AD92B5C2D6D} = {33D894D9-9573-40F4-B76D-BD7913AEB221}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {746CF2B5-54D7-4C43-8D9C-CF451F644D35}
