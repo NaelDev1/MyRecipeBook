@@ -51,3 +51,8 @@ void MigrateDataBse()
 
     DatabaseMigration.Migrate(builder?.Configuration.GetConnectionString("ConnectionPostgree")!, serviceScope.ServiceProvider);
 }
+
+public partial class Program
+{
+
+}
