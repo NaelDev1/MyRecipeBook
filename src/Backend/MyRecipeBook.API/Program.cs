@@ -47,6 +47,10 @@ app.Run();
 
 void MigrateDataBse()
 {
+    bool isTesting = app.Configuration.GetValue<bool>("InMemoryTest");
+    if (isTesting)
+        return;
+
     var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
     DatabaseMigration.Migrate(builder?.Configuration.GetConnectionString("ConnectionPostgree")!, serviceScope.ServiceProvider);

@@ -15,8 +15,13 @@ public static class DependencyInjectionExtension
 {
     public static  void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        AddDbContext(services, configuration);
         AddRepositories(services);
+
+        bool isTesting = configuration.GetValue<bool>("InMemoryTest");
+        if (isTesting)
+            return;
+
+        AddDbContext(services, configuration);
         AddFluentMigrator_Postgree(services, configuration);
 
 
@@ -24,6 +29,8 @@ public static class DependencyInjectionExtension
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
+
+
         var connectionString = configuration.GetConnectionString("ConnectionPostgree");
         services.AddDbContext<MyRecipeBookDbContext>(options =>
         {

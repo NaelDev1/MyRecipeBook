@@ -4,6 +4,6 @@ namespace CommonTestUtilities.Cryptography;
 
 public static class PasswordEncripterBuilder
 {
-    public static PasswordEncripter Build() => new PasswordEncripter("abcd");
+    public static PasswordEncripter Build() => new PasswordEncripter("ABC");
 
 }
