@@ -42,7 +42,7 @@ public class RegisterUserUseCaseTest
     }
 
 
-    public RegisterUserUseCase UseCaseBuild(string? email = null)
+    public static RegisterUserUseCase UseCaseBuild(string? email = null)
     {
         var encryptor = PasswordEncripterBuilder.Build();
 

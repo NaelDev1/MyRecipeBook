@@ -43,7 +43,7 @@ app.MapControllers();
 
 MigrateDataBse();
 
-app.Run();
+await app.RunAsync();
 
 void MigrateDataBse()
 {
@@ -58,5 +58,5 @@ void MigrateDataBse()
 
 public partial class Program
 {
-
+    protected Program() { }
 }

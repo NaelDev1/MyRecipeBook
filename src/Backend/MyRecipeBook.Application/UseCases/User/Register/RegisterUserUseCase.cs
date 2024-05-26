@@ -48,14 +48,14 @@ public class RegisterUserUseCase: IRegisterUserUseCase
     private async Task ValidateAsync(RequestRegisterUserJson request)
     {
         var validator = new RegisterUserValidator();
-        var result = validator.Validate(request);
+        var result = await validator.ValidateAsync(request);
 
         bool existEmail =  await _readOnlyRepository.ExistActiveUserWithEmail(request.Email);
         if (existEmail)
             result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMessageExceptions.EMAIL_ALREADY_EXISTS));
 
 
-        if(result.IsValid == false)
+        if(!result.IsValid)
         {
             var errorMessages = result.Errors.Select(e => e.ErrorMessage);
 

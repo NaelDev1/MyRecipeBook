@@ -26,7 +26,7 @@ public static class DatabaseMigration
 
         var records = dbConnection.Query("select datname from pg_database where datname = @databasename", new { databasename  = databaseName});
 
-        if(records.Any() == false)
+        if(!records.Any())
             dbConnection.Execute($"CREATE DATABASE {databaseName}");
     }
 
